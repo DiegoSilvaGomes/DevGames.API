@@ -4,11 +4,12 @@ Projeto desenvolvido durante a ***3ª Jornada .NET Direto ao Ponto***.
 
 Durante a Jornada foi desenvolvida uma API Rest completa do zero, com diversos endpoints e usando as tecnologias:
 
-- Linguagem C# e .NET 5
+- ASP.NET Core e .NET 5
 - Padrão Repository
 - Entity Framework Core
 - SQL Server
 - AutoMapper
+- Injeção de Dependência
 - Logs com Serilog
 - Swagger
 
