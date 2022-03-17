@@ -31,20 +31,20 @@ namespace DevGames.API
 
         public IConfiguration Configuration { get; }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    var settings = config.Build();
-                    Serilog.Log.Logger = new LoggerConfiguration()
-                        .Enrich.FromLogContext()
-                        .WriteTo.MSSqlServer(settings.GetConnectionString("DevGamesCs"), sinkOptions: new MSSqlServerSinkOptions()
-                        {
-                            AutoCreateSqlTable = true,
-                            TableName = "Logs"
-                        })
-                        .CreateLogger();
-                }).UseSerilog();
+        //public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //    Host.CreateDefaultBuilder(args)
+        //        .ConfigureAppConfiguration((hostingContext, config) =>
+        //        {
+        //            var settings = config.Build();
+        //            Serilog.Log.Logger = new LoggerConfiguration()
+        //                .Enrich.FromLogContext()
+        //                .WriteTo.MSSqlServer(settings.GetConnectionString("DevGamesCs"), sinkOptions: new MSSqlServerSinkOptions()
+        //                {
+        //                    AutoCreateSqlTable = true,
+        //                    TableName = "Logs"
+        //                })
+        //                .CreateLogger();
+        //        }).UseSerilog();
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -54,8 +54,11 @@ namespace DevGames.API
             var connectionString = Configuration.GetConnectionString("DevGamesCs");
 
 
-            services.AddDbContext<DevGamesContext>(o => 
-                o.UseSqlServer(connectionString));
+            // services.AddDbContext<DevGamesContext>(o => 
+            //    o.UseSqlServer(connectionString));
+
+            services.AddDbContext<DevGamesContext>(o =>
+                o.UseInMemoryDatabase("DevGames"));
 
             services.AddScoped<IBoardRepository, BoardRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
