@@ -54,11 +54,11 @@ namespace DevGames.API
             var connectionString = Configuration.GetConnectionString("DevGamesCs");
 
 
-            // services.AddDbContext<DevGamesContext>(o => 
-            //    o.UseSqlServer(connectionString));
+            services.AddDbContext<DevGamesContext>(o => 
+                o.UseSqlServer(connectionString));
 
-            services.AddDbContext<DevGamesContext>(o =>
-                o.UseInMemoryDatabase("DevGames"));
+            // services.AddDbContext<DevGamesContext>(o =>
+            //     o.UseInMemoryDatabase("DevGames"));
 
             services.AddScoped<IBoardRepository, BoardRepository>();
             services.AddScoped<IPostRepository, PostRepository>();
